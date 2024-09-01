@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { RiWhatsappLine } from "react-icons/ri";
+
 
 export default function Home() {
   const [number, setNumber] = useState("");
@@ -10,7 +12,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   const getUrl = async () => {
-    const response = await axios.get("http://localhost:3000/api/getUrl");
+    const response = await axios.get("https://mylaser1.xyz/api/getUrl");
     setNumber(response.data.whatsappNumber)
     setImageUrl(response.data.imageUrl)
     setLoading(false);
@@ -28,8 +30,11 @@ export default function Home() {
         </div>
       ) : (
         <a href={`https://wa.me/${number}`}>
-          <div className=" flex w-full h-screen items-center justify-center">
-            <img src={imageUrl} className="min-h-screen" />
+          <div className=" flex flex-col w-full h-screen items-center justify-center">
+            <img src={imageUrl} className="min-h-[70vh]" />
+            <button className="py-4 px-14 mt-6 flex items-center gap-2 bg-green-600 text-xl rounded-lg font-bold">
+              Whatsapp Us <RiWhatsappLine className="size-7"/>
+            </button>
           </div>
         </a>
       )}
